@@ -23,7 +23,11 @@ app.get("/*", async (c) => {
 
     if (resp.headers.get("Content-Type")?.includes("html")) {
         // url置き換え
-        let html = await resp.text(); // DOMParse => ...
+        let html = await resp.text() + `
+        <script>
+            console.log("HonoProxy : https://github.com/EdamAme-x/hono-proxy")
+        </script>
+        `; // DOMParse => ...
         return c.html(html);
     }
 
