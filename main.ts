@@ -21,6 +21,12 @@ app.get("/*", async (c) => {
 
     const resp = await fetch(sendURL, sendHeaders as any);
 
+    if (resp.headers.get("Content-Type")?.includes("html")) {
+        // url置き換え
+        let html = await resp.text(); // DOMParse => ...
+        return c.html(html);
+    }
+
     return resp;
 });
 
